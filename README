@@ -28,3 +28,4 @@ Also, you may optionally use the included EasyCache cache object as a replacemen
 To use EasyCache, use the NSURLCache setSharedCache: method to set the cache to an instance of EasyCache, or use the EasyCache initCache class method to automatically perform cache setup.
 
 
+NOTE: The error reporting I've built into this library sucks atm.  It needs to be improved, but I haven't got around to doing it yet.  You've been warned.
