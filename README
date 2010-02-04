@@ -1,0 +1,30 @@
+EasyURLDownloader is a fast and easy way to download files in the iPhone Cocoa framework.  You can download files simply using this form:
+
+[[EasyURLDownloader sharedDownloader] startDownloading:@"http://some.url/some.html" withDelegate:self];
+
+[[EasyURLDownloader sharedDownloader] startDownloading:@"http://some.url/some.plist" withDelegate:self forType:kEasyURLDownloadTypeDictionary];
+
+[[EasyURLDownloader sharedDownloader] startDownloading:@"http://some.url/some.jpg" withDelegate:self forType:kEasyURLDownloadTypeImage];
+
+By specifying the type in the download call, you will instruct the library to coerce the returned data into the correct object when your delegate is notified of the download completing. (NSDictionary, UIImage, etc.) If you do not specify a type, the returned data will be in an NSData object.
+
+Additionally, you may specify cache behavior in the download call, like so:
+
+[[EasyURLDownloader sharedDownloader] startDownloading:@"http://always.fresh" withDelegate:self forType:kEasyURLDownloadTypeData noCache:TRUE];
+
+Your delegate must adhere to the following protocol to receive notifications:
+
+@protocol EasyURLDownloaderNotifyProtocol<NSObject>
+@optional
+-(void) downloadForURL:(NSString*)url completeWithObject:(id)object;
+-(void) downloadForURL:(NSString*)url failedWithError:(NSError*)error;
+-(void) downloadForURL:(NSString*)url hasCompletedPercent:(float)percent;
+-(void) downloadForURL:(NSString*)url startedWithResponse:(NSURLResponse*)response;
+@end
+
+
+Also, you may optionally use the included EasyCache cache object as a replacement to the NSURLCache object that is used by default in the Cocoa framework.  When using EasyCache, EasyURLDownloader will automatically take advantage of HTTP Conditional Gets (If-Modified-Since, If-None-Match) to only fetch objects that do not exist in the cache.  Additionally, EasyURLDownloader will automatically flush cached objects to disk when the in-memory limit of objects is exceeded; the amount of disk and memory capacity may be configured by EasyCache's setMemoryCapacity: and setDiskCapacity: methods.  You may force a flush to disk at any time.  
+
+To use EasyCache, use the NSURLCache setSharedCache: method to set the cache to an instance of EasyCache, or use the EasyCache initCache class method to automatically perform cache setup.
+
+
