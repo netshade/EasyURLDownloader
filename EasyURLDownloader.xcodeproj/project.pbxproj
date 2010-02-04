@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AA747D9F0F9514B9006C5449 /* StarURLDownloader_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* StarURLDownloader_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		BE8F107F1063CCAE001BF626 /* EasyCache.h in Headers */ = {isa = PBXBuildFile; fileRef = BE8F10791063CCAE001BF626 /* EasyCache.h */; };
 		BE8F10801063CCAE001BF626 /* EasyCache.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8F107A1063CCAE001BF626 /* EasyCache.m */; };
@@ -21,10 +20,10 @@
 		BE8F108C1063CCDD001BF626 /* NSStringMD5.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8F10881063CCDD001BF626 /* NSStringMD5.m */; };
 		BE8F10901063CD33001BF626 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = BE8F108E1063CD33001BF626 /* Reachability.h */; };
 		BE8F10911063CD33001BF626 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8F108F1063CD33001BF626 /* Reachability.m */; };
+		BEB9FD7B111B0FE5003CEA9F /* EasyURLDownloader_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = BEB9FD7A111B0FE5003CEA9F /* EasyURLDownloader_Prefix.pch */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AA747D9E0F9514B9006C5449 /* StarURLDownloader_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarURLDownloader_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BE8F10791063CCAE001BF626 /* EasyCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyCache.h; sourceTree = "<group>"; };
 		BE8F107A1063CCAE001BF626 /* EasyCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyCache.m; sourceTree = "<group>"; };
@@ -38,7 +37,8 @@
 		BE8F10881063CCDD001BF626 /* NSStringMD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringMD5.m; sourceTree = "<group>"; };
 		BE8F108E1063CD33001BF626 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		BE8F108F1063CD33001BF626 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		D2AAC07E0554694100DB518D /* libStarURLDownloader-iphoneos-Release.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libStarURLDownloader-iphoneos-Release.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEB9FD7A111B0FE5003CEA9F /* EasyURLDownloader_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyURLDownloader_Prefix.pch; sourceTree = "<group>"; };
+		D2AAC07E0554694100DB518D /* libEasyURLDownloader-iphoneos-Release.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libEasyURLDownloader-iphoneos-Release.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +56,7 @@
 		034768DFFF38A50411DB9C8B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC07E0554694100DB518D /* libStarURLDownloader-iphoneos-Release.a */,
+				D2AAC07E0554694100DB518D /* libEasyURLDownloader-iphoneos-Release.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -102,7 +102,7 @@
 		32C88DFF0371C24200C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				AA747D9E0F9514B9006C5449 /* StarURLDownloader_Prefix.pch */,
+				BEB9FD7A111B0FE5003CEA9F /* EasyURLDownloader_Prefix.pch */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -114,13 +114,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA747D9F0F9514B9006C5449 /* StarURLDownloader_Prefix.pch in Headers */,
 				BE8F107F1063CCAE001BF626 /* EasyCache.h in Headers */,
 				BE8F10811063CCAE001BF626 /* EasyHTTPURLResponse.h in Headers */,
 				BE8F10831063CCAE001BF626 /* EasyURLDownloader.h in Headers */,
 				BE8F10891063CCDD001BF626 /* DateFormatterUtil.h in Headers */,
 				BE8F108B1063CCDD001BF626 /* NSStringMD5.h in Headers */,
 				BE8F10901063CD33001BF626 /* Reachability.h in Headers */,
+				BEB9FD7B111B0FE5003CEA9F /* EasyURLDownloader_Prefix.pch in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,7 +141,7 @@
 			);
 			name = EasyURLDownloader;
 			productName = StarURLDownloader;
-			productReference = D2AAC07E0554694100DB518D /* libStarURLDownloader-iphoneos-Release.a */;
+			productReference = D2AAC07E0554694100DB518D /* libEasyURLDownloader-iphoneos-Release.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -185,15 +185,15 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
-				DSTROOT = /tmp/StarURLDownloader.dst;
+				DSTROOT = /tmp/EasyURLDownloader.dst;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = StarURLDownloader_Prefix.pch;
+				GCC_PREFIX_HEADER = EasyURLDownloader_Prefix.pch;
 				INSTALL_PATH = /usr/local/lib;
-				PRODUCT_NAME = "StarURLDownloader$(EFFECTIVE_PLATFORM_NAME)-$(CONFIGURATION)";
+				PRODUCT_NAME = "EasyURLDownloader$(EFFECTIVE_PLATFORM_NAME)-$(CONFIGURATION)";
 			};
 			name = Debug;
 		};
@@ -202,12 +202,12 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				DSTROOT = /tmp/StarURLDownloader.dst;
+				DSTROOT = /tmp/EasyURLDownloader.dst;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = StarURLDownloader_Prefix.pch;
+				GCC_PREFIX_HEADER = EasyURLDownloader_Prefix.pch;
 				INSTALL_PATH = /usr/local/lib;
-				PRODUCT_NAME = "StarURLDownloader$(EFFECTIVE_PLATFORM_NAME)-$(CONFIGURATION)";
+				PRODUCT_NAME = "EasyURLDownloader$(EFFECTIVE_PLATFORM_NAME)-$(CONFIGURATION)";
 			};
 			name = Release;
 		};
