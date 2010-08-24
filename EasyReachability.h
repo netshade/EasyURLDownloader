@@ -1,6 +1,6 @@
 /*
 
-File: Reachability.h
+File: EasyReachability.h
 Abstract: SystemConfiguration framework wrapper.
 
 Version: 1.5
@@ -48,9 +48,9 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 #import <UIKit/UIKit.h>
 #import <SystemConfiguration/SystemConfiguration.h>
 
-@class Reachability;
+@class EasyReachability;
 
-@interface Reachability : NSObject {
+@interface EasyReachability : NSObject {
     
 @private
 	BOOL _networkStatusNotificationsEnabled;
@@ -85,7 +85,7 @@ typedef enum {
 @property (nonatomic, assign) NSMutableDictionary *reachabilityQueries;
 
 // This class is intended to be used as a singleton.
-+ (Reachability *)sharedReachability;
++ (EasyReachability *)sharedReachability;
 
 // Is self.hostName is not nil, determines its reachability.
 // If self.hostName is nil and self.address is not nil, determines the reachability of self.address.
@@ -99,11 +99,11 @@ typedef enum {
  When reachability change notifications are posted, the callback method 'ReachabilityCallback' is called
  and posts a notification that the client application can observe to learn about changes.
  */
-static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReachabilityFlags flags, void *info);
+static void EasyReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReachabilityFlags flags, void *info);
 
 @end
 
-@interface ReachabilityQuery : NSObject
+@interface EasyReachabilityQuery : NSObject
 {
 @private
 	SCNetworkReachabilityRef _reachabilityRef;

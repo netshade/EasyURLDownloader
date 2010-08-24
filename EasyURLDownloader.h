@@ -29,10 +29,10 @@
 
 @protocol EasyURLDownloaderNotifyProtocol<NSObject>
 @optional
--(void) downloadForURL:(NSString*)url completeWithObject:(id)object;
--(void) downloadForURL:(NSString*)url failedWithError:(NSError*)error;
--(void) downloadForURL:(NSString*)url hasCompletedPercent:(float)percent;
--(void) downloadForURL:(NSString*)url startedWithResponse:(NSURLResponse*)response;
+-(void) downloadForURL:(NSString*)url completeWithObject:(id)object tag:(NSInteger)tag;
+-(void) downloadForURL:(NSString*)url failedWithError:(NSError*)error tag:(NSInteger)tag;
+-(void) downloadForURL:(NSString*)url hasCompletedPercent:(float)percent tag:(NSInteger)tag;
+-(void) downloadForURL:(NSString*)url startedWithResponse:(NSURLResponse*)response tag:(NSInteger)tag;
 @end
 
 
@@ -43,9 +43,11 @@
 	NSString *urlString;
 	long long expectedSize;
 	unsigned int statusCode;
+	NSInteger tag;
 }
 
 @property(readonly, assign) id<EasyURLDownloaderNotifyProtocol> delegate;
+@property(readwrite, assign) NSInteger tag;
 
 
 -(id) initWithDelegate:(id<EasyURLDownloaderNotifyProtocol>)d andURL:(NSString*)u;
@@ -115,6 +117,10 @@ extern const NSString * const kEasyURLDownloadTypeArray;
 -(void) startDownloading:(NSString*)url withDelegate:(id<EasyURLDownloaderNotifyProtocol>)delegate forType:(const NSString*)type;
 -(void) startDownloading:(NSString*)url withDelegate:(id<EasyURLDownloaderNotifyProtocol>)delegate forType:(const NSString*)type noCache:(BOOL)nc;
 -(void) startDownloading:(NSString*)url withDelegate:(id<EasyURLDownloaderNotifyProtocol>)delegate forType:(const NSString*)type noCache:(BOOL)nc highPriority:(BOOL)b;
+-(void) startDownloading:(NSString*)url withDelegate:(id<EasyURLDownloaderNotifyProtocol>)delegate tag:(NSInteger)tag;
+-(void) startDownloading:(NSString*)url withDelegate:(id<EasyURLDownloaderNotifyProtocol>)delegate forType:(const NSString*)type tag:(NSInteger)tag;
+-(void) startDownloading:(NSString*)url withDelegate:(id<EasyURLDownloaderNotifyProtocol>)delegate forType:(const NSString*)type noCache:(BOOL)nc tag:(NSInteger)tag;
+-(void) startDownloading:(NSString*)url withDelegate:(id<EasyURLDownloaderNotifyProtocol>)delegate forType:(const NSString*)type noCache:(BOOL)nc highPriority:(BOOL)b tag:(NSInteger)tag;
 -(void) startDownloadingOnlyFromCache:(NSString*)url withDelegate:(id<EasyURLDownloaderNotifyProtocol>)delegate forType:(const NSString*)type;
 -(void) observeValueForKeyPath:(NSString*)keypath ofObject:(id)object change:(NSDictionary*)change context:(void*)context;
 -(void) cancelAllPendingDownloads;

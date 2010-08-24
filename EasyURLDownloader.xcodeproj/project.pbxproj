@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5834D27912240247005980C8 /* EasyReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 5834D27712240247005980C8 /* EasyReachability.h */; };
+		5834D27A12240247005980C8 /* EasyReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 5834D27812240247005980C8 /* EasyReachability.m */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		BE8F107F1063CCAE001BF626 /* EasyCache.h in Headers */ = {isa = PBXBuildFile; fileRef = BE8F10791063CCAE001BF626 /* EasyCache.h */; };
 		BE8F10801063CCAE001BF626 /* EasyCache.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8F107A1063CCAE001BF626 /* EasyCache.m */; };
@@ -18,12 +20,12 @@
 		BE8F108A1063CCDD001BF626 /* DateFormatterUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8F10861063CCDD001BF626 /* DateFormatterUtil.m */; };
 		BE8F108B1063CCDD001BF626 /* NSStringMD5.h in Headers */ = {isa = PBXBuildFile; fileRef = BE8F10871063CCDD001BF626 /* NSStringMD5.h */; };
 		BE8F108C1063CCDD001BF626 /* NSStringMD5.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8F10881063CCDD001BF626 /* NSStringMD5.m */; };
-		BE8F10901063CD33001BF626 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = BE8F108E1063CD33001BF626 /* Reachability.h */; };
-		BE8F10911063CD33001BF626 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8F108F1063CD33001BF626 /* Reachability.m */; };
 		BEB9FD7B111B0FE5003CEA9F /* EasyURLDownloader_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = BEB9FD7A111B0FE5003CEA9F /* EasyURLDownloader_Prefix.pch */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5834D27712240247005980C8 /* EasyReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyReachability.h; sourceTree = "<group>"; };
+		5834D27812240247005980C8 /* EasyReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyReachability.m; sourceTree = "<group>"; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BE8F10791063CCAE001BF626 /* EasyCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyCache.h; sourceTree = "<group>"; };
 		BE8F107A1063CCAE001BF626 /* EasyCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyCache.m; sourceTree = "<group>"; };
@@ -35,10 +37,8 @@
 		BE8F10861063CCDD001BF626 /* DateFormatterUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFormatterUtil.m; sourceTree = "<group>"; };
 		BE8F10871063CCDD001BF626 /* NSStringMD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringMD5.h; sourceTree = "<group>"; };
 		BE8F10881063CCDD001BF626 /* NSStringMD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringMD5.m; sourceTree = "<group>"; };
-		BE8F108E1063CD33001BF626 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		BE8F108F1063CD33001BF626 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		BEB9FD7A111B0FE5003CEA9F /* EasyURLDownloader_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyURLDownloader_Prefix.pch; sourceTree = "<group>"; };
-		D2AAC07E0554694100DB518D /* libEasyURLDownloader-iphoneos-Release.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libEasyURLDownloader-iphoneos-Release.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC07E0554694100DB518D /* libEasyURLDownloader-iphoneos-Debug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libEasyURLDownloader-iphoneos-Debug.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +56,7 @@
 		034768DFFF38A50411DB9C8B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC07E0554694100DB518D /* libEasyURLDownloader-iphoneos-Release.a */,
+				D2AAC07E0554694100DB518D /* libEasyURLDownloader-iphoneos-Debug.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -83,8 +83,8 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				BE8F108E1063CD33001BF626 /* Reachability.h */,
-				BE8F108F1063CD33001BF626 /* Reachability.m */,
+				5834D27712240247005980C8 /* EasyReachability.h */,
+				5834D27812240247005980C8 /* EasyReachability.m */,
 				BE8F10851063CCDD001BF626 /* DateFormatterUtil.h */,
 				BE8F10861063CCDD001BF626 /* DateFormatterUtil.m */,
 				BE8F10871063CCDD001BF626 /* NSStringMD5.h */,
@@ -119,8 +119,8 @@
 				BE8F10831063CCAE001BF626 /* EasyURLDownloader.h in Headers */,
 				BE8F10891063CCDD001BF626 /* DateFormatterUtil.h in Headers */,
 				BE8F108B1063CCDD001BF626 /* NSStringMD5.h in Headers */,
-				BE8F10901063CD33001BF626 /* Reachability.h in Headers */,
 				BEB9FD7B111B0FE5003CEA9F /* EasyURLDownloader_Prefix.pch in Headers */,
+				5834D27912240247005980C8 /* EasyReachability.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,7 +141,7 @@
 			);
 			name = EasyURLDownloader;
 			productName = StarURLDownloader;
-			productReference = D2AAC07E0554694100DB518D /* libEasyURLDownloader-iphoneos-Release.a */;
+			productReference = D2AAC07E0554694100DB518D /* libEasyURLDownloader-iphoneos-Debug.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -172,7 +172,7 @@
 				BE8F10841063CCAE001BF626 /* EasyURLDownloader.m in Sources */,
 				BE8F108A1063CCDD001BF626 /* DateFormatterUtil.m in Sources */,
 				BE8F108C1063CCDD001BF626 /* NSStringMD5.m in Sources */,
-				BE8F10911063CD33001BF626 /* Reachability.m in Sources */,
+				5834D27A12240247005980C8 /* EasyReachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,10 +219,10 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 2.2.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PREBINDING = NO;
-				SDKROOT = iphoneos3.1;
+				SDKROOT = iphoneos4.0;
 			};
 			name = Debug;
 		};
@@ -233,10 +233,10 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 2.2.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PREBINDING = NO;
-				SDKROOT = iphoneos3.1;
+				SDKROOT = iphoneos4.0;
 			};
 			name = Release;
 		};

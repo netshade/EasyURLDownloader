@@ -26,7 +26,7 @@
 //
 
 #import "EasyURLDownloader.h"
-#import "Reachability.h"
+#import "EasyReachability.h"
 #import "EasyCache.h"
 
 
@@ -38,6 +38,7 @@ const NSString * const kEasyURLDownloadTypeArray = @"ARRAY";
 @implementation EasyURLDownloaderNotifyDelegate
 
 @synthesize delegate;
+@synthesize tag;
 
 -(id) initWithDelegate:(id)d andURL:(NSString*)u;{
 	if(self = [super init]){
@@ -45,6 +46,7 @@ const NSString * const kEasyURLDownloadTypeArray = @"ARRAY";
 		type = kEasyURLDownloadTypeData;
 		buffer = [[NSMutableData alloc] init];
 		urlString = [u retain];
+		tag = 0;
 	}
 	return self;
 }
@@ -55,7 +57,9 @@ const NSString * const kEasyURLDownloadTypeArray = @"ARRAY";
 		type = t;
 		buffer = [[NSMutableData alloc] init];
 		urlString = [u retain];
+		tag = 0;
 	}
+	
 	return self;
 }
 
@@ -69,9 +73,9 @@ const NSString * const kEasyURLDownloadTypeArray = @"ARRAY";
 -(void) appendData:(NSData*)data {
 	[buffer appendData:data];
 	if(expectedSize > 0){
-		if([delegate respondsToSelector:@selector(downloadForURL:hasCompletedPercent:)]){
+		if([delegate respondsToSelector:@selector(downloadForURL:hasCompletedPercent:tag:)]){
 			float percent_complete = (double)[buffer length] / (double)expectedSize;
-			[delegate downloadForURL:nil hasCompletedPercent:percent_complete];
+			[delegate downloadForURL:nil hasCompletedPercent:percent_complete tag:tag];
 		}
 	}
 }
@@ -84,8 +88,8 @@ const NSString * const kEasyURLDownloadTypeArray = @"ARRAY";
 	NSHTTPURLResponse *r = (NSHTTPURLResponse*) response;
 	statusCode = [r statusCode];
 	expectedSize = [response expectedContentLength];
-	if([delegate respondsToSelector:@selector(downloadForURL:startedWithResponse:)]){
-		[delegate downloadForURL:urlString startedWithResponse:response];
+	if([delegate respondsToSelector:@selector(downloadForURL:startedWithResponse:tag:)]){
+		[delegate downloadForURL:urlString startedWithResponse:response tag:tag];
 	}
 }
 
@@ -98,14 +102,14 @@ const NSString * const kEasyURLDownloadTypeArray = @"ARRAY";
 			lb = [resp data];
 		} 
 	}
-	BOOL hasFailureMethod = [delegate respondsToSelector:@selector(downloadForURL:failedWithError:)];
-	if([delegate respondsToSelector:@selector(downloadForURL:completeWithObject:)]){
+	BOOL hasFailureMethod = [delegate respondsToSelector:@selector(downloadForURL:failedWithError:tag:)];
+	if([delegate respondsToSelector:@selector(downloadForURL:completeWithObject:tag:)]){
 		if(type == kEasyURLDownloadTypeImage){
 			UIImage *img = [[UIImage alloc] initWithData:lb];
 			if(img){
-				[delegate downloadForURL:urlString completeWithObject:img];
+				[delegate downloadForURL:urlString completeWithObject:img tag:tag];
 			} else if(hasFailureMethod) {
-				[delegate downloadForURL:urlString failedWithError:nil];
+				[delegate downloadForURL:urlString failedWithError:nil tag:tag];
 			}
 			[img release];
 		} else if(type == kEasyURLDownloadTypeDictionary){
@@ -118,11 +122,11 @@ const NSString * const kEasyURLDownloadTypeArray = @"ARRAY";
 			CFRelease(reader);
 			if(error){
 				if(hasFailureMethod){
-					[delegate downloadForURL:urlString failedWithError:nil];
+					[delegate downloadForURL:urlString failedWithError:nil tag:tag];
 				}
 				CFRelease(error);
 			} else {
-				[delegate downloadForURL:urlString completeWithObject:(id)plist];
+				[delegate downloadForURL:urlString completeWithObject:(id)plist tag:tag];
 				CFRelease(plist);
 			}
 		} else if(type == kEasyURLDownloadTypeArray){
@@ -135,24 +139,24 @@ const NSString * const kEasyURLDownloadTypeArray = @"ARRAY";
 			CFRelease(reader);
 			if(error){
 				if(hasFailureMethod){
-					[delegate downloadForURL:urlString failedWithError:nil];
+					[delegate downloadForURL:urlString failedWithError:nil tag:tag];
 				}
 				CFRelease(error);
 			} else {
-				[delegate downloadForURL:urlString completeWithObject:(id)plist];
+				[delegate downloadForURL:urlString completeWithObject:(id)plist tag:tag];
 				CFRelease(plist);
 			}
 		}  else if(type == @"CUSTOM"){
 
 		} else {
-			[delegate downloadForURL:urlString completeWithObject:lb];
+			[delegate downloadForURL:urlString completeWithObject:lb tag:tag];
 		}
 	} 
 }
 
 -(void) notifyError:(NSError*)error {
-	if([delegate respondsToSelector:@selector(downloadForURL:failedWithError:)]){
-		[delegate downloadForURL:urlString failedWithError:error];
+	if([delegate respondsToSelector:@selector(downloadForURL:failedWithError:tag:)]){
+		[delegate downloadForURL:urlString failedWithError:error tag:tag];
 	}
 }
 
@@ -217,7 +221,7 @@ const NSString * const kEasyURLDownloadTypeArray = @"ARRAY";
 	NSURL *original_request = [[NSURL alloc] initWithString:url];
 	NSString *host = [original_request host];
 	NSURLRequestCachePolicy cp = NSURLRequestUseProtocolCachePolicy;
-	Reachability *r = [Reachability sharedReachability];
+	EasyReachability *r = [EasyReachability sharedReachability];
 	[r setHostName:host]; // ip
 	BOOL cannotReach = [r remoteHostStatus] == NotReachable;
 	if(!cannotReach){
@@ -466,7 +470,24 @@ const NSString * const kEasyURLDownloadTypeArray = @"ARRAY";
 }
 
 -(void) startDownloading:(NSString*)url withDelegate:(id<EasyURLDownloaderNotifyProtocol>)delegate forType:(const NSString*)type noCache:(BOOL)nc highPriority:(BOOL)b {
+	[self startDownloading:url withDelegate:delegate forType:type noCache:nc highPriority:b tag:0];
+}
+
+-(void) startDownloading:(NSString*)url withDelegate:(id<EasyURLDownloaderNotifyProtocol>)delegate tag:(NSInteger)tag {
+	[self startDownloading:url withDelegate:delegate forType:kEasyURLDownloadTypeData noCache:NO highPriority:NO tag:tag];
+}
+
+-(void) startDownloading:(NSString*)url withDelegate:(id<EasyURLDownloaderNotifyProtocol>)delegate forType:(const NSString*)type tag:(NSInteger)tag{
+	[self startDownloading:url withDelegate:delegate forType:type noCache:NO highPriority:NO tag:tag];
+}
+
+-(void) startDownloading:(NSString*)url withDelegate:(id<EasyURLDownloaderNotifyProtocol>)delegate forType:(const NSString*)type noCache:(BOOL)nc tag:(NSInteger)tag {
+	[self startDownloading:url withDelegate:delegate forType:type noCache:nc highPriority:NO tag:tag];
+}
+
+-(void) startDownloading:(NSString*)url withDelegate:(id<EasyURLDownloaderNotifyProtocol>)delegate forType:(const NSString*)type noCache:(BOOL)nc highPriority:(BOOL)b tag:(NSInteger)tag{
 	EasyURLDownloaderNotifyDelegate *mydelegate = [[EasyURLDownloaderNotifyDelegate alloc] initWithDelegate:delegate andType:type andURL:url];
+	[mydelegate setTag:tag];
 	EasyURLOperation *op = [[EasyURLOperation alloc] initWithDownload:url andRecipient:mydelegate cacheBehavior:((nc) ? kEasyURLOperationNoCache : kEasyURLOperationNormalCache)];
 	if(b){
 		[op setQueuePriority:NSOperationQueuePriorityVeryHigh];
