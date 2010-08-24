@@ -65,8 +65,10 @@ const NSString * const kEasyURLDownloadTypeArray = @"ARRAY";
 
 -(void) dealloc {
 	[delegate release];
+	delegate = nil;
 	[urlString release];
 	[buffer release];
+	buffer = nil;
 	[super dealloc];
 }
 
@@ -192,16 +194,6 @@ const NSString * const kEasyURLDownloadTypeArray = @"ARRAY";
 	[super dealloc];
 }
 
--(void) cancel {
-	[self willChangeValueForKey:@"isCancelled"];
-	cancelled = TRUE;
-	[self didChangeValueForKey:@"isCancelled"];
-}
-
--(BOOL) isCancelled {
-	return cancelled;
-}
-
 -(NSString*) description {
 	return [NSString stringWithFormat:@"(EasyURLOperation:%@, cacheBehavior:%i, running:%s, cancelled:%s, finished:%s)", 
 			url, 
@@ -212,12 +204,7 @@ const NSString * const kEasyURLDownloadTypeArray = @"ARRAY";
 }
 
 -(void) main {
-	[self willChangeValueForKey:@"isExecuting"];
-	{
-		running = TRUE;
-	}
 	NSAutoreleasePool *threadpool = [[NSAutoreleasePool alloc] init];
-	[self didChangeValueForKey:@"isExecuting"];
 	NSURL *original_request = [[NSURL alloc] initWithString:url];
 	NSString *host = [original_request host];
 	NSURLRequestCachePolicy cp = NSURLRequestUseProtocolCachePolicy;
@@ -254,7 +241,6 @@ const NSString * const kEasyURLDownloadTypeArray = @"ARRAY";
 			}
 			[original_request release];
 			[threadpool release];
-			[self setFinished];
 			return;
 		} else if(cacheBehavior == kEasyURLOperationNormalCache){
 			/*
@@ -281,7 +267,6 @@ const NSString * const kEasyURLDownloadTypeArray = @"ARRAY";
 		} else if(cacheBehavior == kEasyURLOperationOnlyCache){
 			[original_request release];
 			[threadpool release];
-			[self setFinished];
 			return;
 		}
 	}
@@ -296,29 +281,14 @@ const NSString * const kEasyURLDownloadTypeArray = @"ARRAY";
 	 */
 	NSURLConnection *c = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 	BOOL got_input;
-	while(![self isFinished] && ![self isCancelled]){
+	while(!finished && ![self isCancelled]){
 		got_input = [[NSRunLoop	currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
 		if(!got_input){
 			break;
 		}
-		[threadpool drain];
 	}
 	[threadpool release];
 	[c release];
-	if(![self isFinished]){
-		[self setFinished];
-	}
-	[self willChangeValueForKey:@"isExecuting"];
-	running = FALSE;
-	[self didChangeValueForKey:@"isExecuting"];
-}
-
--(BOOL) isExecuting {
-	return running;
-}
-
--(BOOL) isFinished {
-	return finished;
 }
 
 -(BOOL) isConcurrent {
@@ -380,9 +350,7 @@ const NSString * const kEasyURLDownloadTypeArray = @"ARRAY";
 }
 
 -(void) setFinished {
-	[self willChangeValueForKey:@"isFinished"];
-	finished = TRUE;
-	[self didChangeValueForKey:@"isFinished"];
+	finished = YES;
 }
 
 
