@@ -167,6 +167,7 @@ const NSString * const kEasyURLDownloadTypeArray = @"ARRAY";
 @implementation EasyURLOperation
 
 @synthesize recipient;
+@synthesize headers;
 
 -(id) initWithDownload:(NSString*)u andRecipient:(EasyURLDownloaderNotifyDelegate*)r cacheBehavior:(EasyURLOperationCacheBehavior)nc{
 	if(self = [super init]){
@@ -221,6 +222,9 @@ const NSString * const kEasyURLDownloadTypeArray = @"ARRAY";
 	[request setValue:host forHTTPHeaderField:@"Host"];
 	[request setValue:[[EasyURLDownloader sharedDownloader] userAgent] forHTTPHeaderField:@"User-Agent"];
 	[request setValue:[[EasyURLDownloader sharedDownloader] applicationName] forHTTPHeaderField:@"X-Application"];
+	for(NSString * header in headers){
+		[request setValue:[headers objectForKey:header] forHTTPHeaderField:header];
+	}
 	NSURLCache *sc = [NSURLCache sharedURLCache];
 	BOOL isEasyCache = [sc isKindOfClass:[EasyCache class]];
 	if(cacheBehavior == kEasyURLOperationNormalCache || cacheBehavior == kEasyURLOperationOnlyCache){
@@ -426,34 +430,50 @@ const NSString * const kEasyURLDownloadTypeArray = @"ARRAY";
 }
 
 -(void) startDownloading:(NSString*)url withDelegate:(id<EasyURLDownloaderNotifyProtocol>)delegate {
-	[self startDownloading:url withDelegate:delegate forType:kEasyURLDownloadTypeData noCache:NO highPriority:NO];
+	[self startDownloading:url withDelegate:delegate andHeaders:nil forType:kEasyURLDownloadTypeData noCache:NO highPriority:NO tag:-1];
 }
 
 -(void) startDownloading:(NSString*)url withDelegate:(id<EasyURLDownloaderNotifyProtocol>)delegate forType:(const NSString*)type {
-	[self startDownloading:url withDelegate:delegate forType:type noCache:NO highPriority:NO];
+	[self startDownloading:url withDelegate:delegate andHeaders:nil forType:type noCache:NO highPriority:NO tag:-1];
 }
 
 -(void) startDownloading:(NSString*)url withDelegate:(id<EasyURLDownloaderNotifyProtocol>)delegate forType:(const NSString*)type noCache:(BOOL)nc {
-	[self startDownloading:url withDelegate:delegate forType:type noCache:nc highPriority:NO];
+	[self startDownloading:url withDelegate:delegate andHeaders:nil forType:type noCache:nc highPriority:NO tag:-1];
 }
 
 -(void) startDownloading:(NSString*)url withDelegate:(id<EasyURLDownloaderNotifyProtocol>)delegate forType:(const NSString*)type noCache:(BOOL)nc highPriority:(BOOL)b {
-	[self startDownloading:url withDelegate:delegate forType:type noCache:nc highPriority:b tag:0];
+	[self startDownloading:url withDelegate:delegate andHeaders:nil forType:type noCache:nc highPriority:b tag:-1];
 }
 
 -(void) startDownloading:(NSString*)url withDelegate:(id<EasyURLDownloaderNotifyProtocol>)delegate tag:(NSInteger)tag {
-	[self startDownloading:url withDelegate:delegate forType:kEasyURLDownloadTypeData noCache:NO highPriority:NO tag:tag];
+	[self startDownloading:url withDelegate:delegate andHeaders:nil forType:kEasyURLDownloadTypeData noCache:NO highPriority:NO tag:tag];
 }
 
 -(void) startDownloading:(NSString*)url withDelegate:(id<EasyURLDownloaderNotifyProtocol>)delegate forType:(const NSString*)type tag:(NSInteger)tag{
-	[self startDownloading:url withDelegate:delegate forType:type noCache:NO highPriority:NO tag:tag];
+	[self startDownloading:url withDelegate:delegate andHeaders:nil forType:type noCache:NO highPriority:NO tag:tag];
 }
 
 -(void) startDownloading:(NSString*)url withDelegate:(id<EasyURLDownloaderNotifyProtocol>)delegate forType:(const NSString*)type noCache:(BOOL)nc tag:(NSInteger)tag {
-	[self startDownloading:url withDelegate:delegate forType:type noCache:nc highPriority:NO tag:tag];
+	[self startDownloading:url withDelegate:delegate andHeaders:nil forType:type noCache:nc highPriority:NO tag:tag];
 }
 
 -(void) startDownloading:(NSString*)url withDelegate:(id<EasyURLDownloaderNotifyProtocol>)delegate forType:(const NSString*)type noCache:(BOOL)nc highPriority:(BOOL)b tag:(NSInteger)tag{
+	[self startDownloading:url withDelegate:delegate andHeaders:nil forType:type noCache:nc highPriority:b tag:tag];
+}
+
+-(void) startDownloading:(NSString *)url withDelegate:(id <EasyURLDownloaderNotifyProtocol>)delegate andHeaders:(NSDictionary *)headers tag:(NSInteger)tag {
+	[self startDownloading:url withDelegate:delegate andHeaders:headers forType:kEasyURLDownloadTypeData noCache:NO highPriority:NO tag:tag];
+}
+
+-(void) startDownloading:(NSString *)url withDelegate:(id <EasyURLDownloaderNotifyProtocol>)delegate andHeaders:(NSDictionary *)headers forType:(const NSString*)type tag:(NSInteger)tag {
+	[self startDownloading:url withDelegate:delegate andHeaders:headers forType:type noCache:NO highPriority:NO tag:tag];
+}
+
+-(void) startDownloading:(NSString *)url withDelegate:(id <EasyURLDownloaderNotifyProtocol>)delegate andHeaders:(NSDictionary *)headers forType:(const NSString*)type noCache:(BOOL)nc tag:(NSInteger)tag {
+	[self startDownloading:url withDelegate:delegate andHeaders:headers forType:type noCache:nc highPriority:NO tag:tag];
+}
+
+-(void) startDownloading:(NSString *)url withDelegate:(id <EasyURLDownloaderNotifyProtocol>)delegate andHeaders:(NSDictionary *)headers forType:(const NSString*)type noCache:(BOOL)nc highPriority:(BOOL)b tag:(NSInteger)tag {
 	EasyURLDownloaderNotifyDelegate *mydelegate = [[EasyURLDownloaderNotifyDelegate alloc] initWithDelegate:delegate andType:type andURL:url];
 	[mydelegate setTag:tag];
 	EasyURLOperation *op = [[EasyURLOperation alloc] initWithDownload:url andRecipient:mydelegate cacheBehavior:((nc) ? kEasyURLOperationNoCache : kEasyURLOperationNormalCache)];

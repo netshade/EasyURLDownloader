@@ -38,7 +38,7 @@
 		BE8F10871063CCDD001BF626 /* NSStringMD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringMD5.h; sourceTree = "<group>"; };
 		BE8F10881063CCDD001BF626 /* NSStringMD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringMD5.m; sourceTree = "<group>"; };
 		BEB9FD7A111B0FE5003CEA9F /* EasyURLDownloader_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyURLDownloader_Prefix.pch; sourceTree = "<group>"; };
-		D2AAC07E0554694100DB518D /* libEasyURLDownloader-iphoneos-Debug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libEasyURLDownloader-iphoneos-Debug.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AAC07E0554694100DB518D /* libEasyURLDownloader-iphonesimulator-Debug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libEasyURLDownloader-iphonesimulator-Debug.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +56,7 @@
 		034768DFFF38A50411DB9C8B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC07E0554694100DB518D /* libEasyURLDownloader-iphoneos-Debug.a */,
+				D2AAC07E0554694100DB518D /* libEasyURLDownloader-iphonesimulator-Debug.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,7 +141,7 @@
 			);
 			name = EasyURLDownloader;
 			productName = StarURLDownloader;
-			productReference = D2AAC07E0554694100DB518D /* libEasyURLDownloader-iphoneos-Debug.a */;
+			productReference = D2AAC07E0554694100DB518D /* libEasyURLDownloader-iphonesimulator-Debug.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
