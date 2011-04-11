@@ -1,3 +1,6 @@
+NOTE TO BROWSERS: I'm not currently maintaining this code, and heartily recommend you check out ASI HTTP Request for any serious HTTP networking requirements on iOS.  http://github.com/pokeb/asi-http-request    Thanks for browsing.
+
+
 EasyURLDownloader is a fast and easy way to download files in the iPhone Cocoa framework.  You can download files simply using this form:
 
 [[EasyURLDownloader sharedDownloader] startDownloading:@"http://some.url/some.html" withDelegate:self];
